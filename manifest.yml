@@ -1,0 +1,20 @@
+---
+
+# this file is by `cf push` to determine the settings your your app
+
+applications:
+
+# the name of the app that you will use in `cf` commands
+
+- name:    toolcurb
+
+# the indented values are settings for the app they are indented under
+
+  # this is the host name of your app
+  # modify to make unique across the mybluemix.net domain
+
+  host:    toolcurb
+
+  # amount of RAM we'll need.  Prolly could get by with less!
+
+  memory:  256M
