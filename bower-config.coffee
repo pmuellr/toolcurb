@@ -17,6 +17,17 @@ module.exports =
       "dist/fonts/*":                     "fonts"
       "dist/js/bootstrap.min.js":         "js"
 
+  mocha:
+    version: "2.0.x"
+    files:
+      "mocha.js":                         "."
+      "mocha.css":                        "."
+
+  should:
+    version: "4.3.x"
+    files:
+      "should.js":                        "."
+
   angular:
     version: "1.3.x"
     files:

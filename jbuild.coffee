@@ -45,26 +45,29 @@ tasks.bower = ->
 build_toolcurb_js = ->
 
   beg = """
-    ;
-    window.toolcurb = {
-      inBrowser: true
-      version:   "#{pkg.version}"
-    }
+    if (!window.toolcurb) {
 
-    (function(exports){
-      
+      window.toolcurb = {
+        inBrowser: true,
+        version:   "#{pkg.version}"
+      }
+
+      ;(function(exports){
+      //------------------- embed below -------------------
+
   """
 
   end = """
-    })(window.toolcurb);
+      //------------------- embed above -------------------
+      })(window.toolcurb);
+    }
   """
 
-  contents = "#{beg}\n#{cat "lib/toolcurb_.js"}\n#{end}"
+  contents = "#{beg}\n#{cat "lib/toolcurb.js"}\n#{end}"
 
   contents.to "www/scripts/toolcurb.js"
 
-  log "wrote to www/scripts/toolcurb.js:"
-  log contents
+  log "generated www/scripts/toolcurb.js"
 
 #-------------------------------------------------------------------------------
 copyBowerFiles = (dir) ->
