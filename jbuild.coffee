@@ -17,7 +17,7 @@ mkdir "-p", "tmp"
 #-------------------------------------------------------------------------------
 tasks.build = ->
   tasks.bower()
-  build_toolcurb_js()
+  build_browser_version()
 
 #-------------------------------------------------------------------------------
 tasks.watch = ->
@@ -42,32 +42,26 @@ tasks.bower = ->
   copyBowerFiles "www/bower"
 
 #-------------------------------------------------------------------------------
-build_toolcurb_js = ->
+build_browser_version = ->
 
-  beg = """
-    if (!window.toolcurb) {
+  oFile = "www/toolcurb-browser.js"
+  tFile = "tmp/toolcurb-browser.js"
 
-      window.toolcurb = {
-        inBrowser: true,
-        version:   "#{pkg.version}"
-      }
-
-      ;(function(exports){
-      //------------------- embed below -------------------
-
+  opts = """
+    --standalone toolcurb
+    --outfile    #{tFile}
+    --entry      lib/toolcurb
+    --exclude    "node_modules/websocket/**/*"
+    --debug
   """
 
-  end = """
-      //------------------- embed above -------------------
-      })(window.toolcurb);
-    }
-  """
+  opts = opts.trim().split(/\s+/).join(" ")
 
-  contents = "#{beg}\n#{cat "lib/toolcurb.js"}\n#{end}"
+  browserify opts
 
-  contents.to "www/scripts/toolcurb.js"
+  cat_source_map "--fixFileNames #{tFile} #{oFile}"
 
-  log "generated www/scripts/toolcurb.js"
+  log "generated #{oFile}"
 
 #-------------------------------------------------------------------------------
 copyBowerFiles = (dir) ->
