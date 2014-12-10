@@ -1,5 +1,23 @@
 // Licensed under the Apache License. See footer for details.
 
+var console$
+
+$(onLoad)
+
+//------------------------------------------------------------------------------
+function onLoad() {
+  console$ = $("#console")
+
+  log("starting 1")
+  log("starting 2")
+}
+
+//------------------------------------------------------------------------------
+function log(message) {
+  console$.append(message + "\n")
+}
+
+//------------------------------------------------------------------------------
 var opts = {
   url:      location.origin,
   protocol: "sample",
@@ -18,8 +36,8 @@ function cbTargetConnect(err, target) {
   target.on("clientsAttached", function(){})
   target.on("clientsDetached", function(){})
 
-  target.on("request", function(command){
-    command.sendResponse(response)
+  target.on("request", function(request){
+    request.sendResponse(request.argv)  // sendError("message")
   })
 
   target.sendEvent("connected")

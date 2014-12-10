@@ -1,1 +1,1 @@
-web: node lib/toolcurb
+web: node lib/toolcurbd

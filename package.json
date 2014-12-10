@@ -1,14 +1,14 @@
 {
     "name":               "toolcurb",
     "version":            "1.0.0",
-    "description":        "a build tool in/for JavaScript",
+    "description":        "diagnstic tool messaging protocol",
     "author":             "pmuellr",
     "main":               "lib/toolcurb",
     "bin": {
       "toolcurbd":        "lib/toolcurbd.js"
     },
     "scripts": {
-      "start":            "node lib/toolcurbd.js",
+      "start":            "node lib/toolcurbd",
       "jbuild":           "jbuild",
       "watch":            "jbuild watch"
     },
